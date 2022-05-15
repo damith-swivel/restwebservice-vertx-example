@@ -49,8 +49,8 @@ public class App extends AbstractVerticle {
 	                      //  response.setChunked(true);
 	                         String JsonResponse = "{\n" + 
 	                         		"  \"getSIMtypeResponse\": {\n" +
-	                         		"    \"msisdn\": \""+operator+"\",\n" +
-	                         		"    \"imsi\": \""+msisdn+"\",\n" +
+	                         		"    \"Operator\": \""+operator+"\",\n" +
+	                         		"    \"msisdn\": \""+msisdn+"\",\n" +
 	                         		"    \"userType\": \"postpaid\",\n" + 
 	                         		"    \"userStatus\": \"Active\",\n" +
 	                         		"  }\n" + 

@@ -40,7 +40,7 @@ public class App extends AbstractVerticle {
 
           	  Route OperatorTypeCheck = router
 					  //GET Endpoint
-	                     .get("/:operator/:msisdn/getsubscribertype")
+	                     .get("/:operator/:msisdn/getsubscribertype1")
 	                     .produces("application/json")
 	                     .handler(routingContext -> {
 							 String operator = routingContext.request().getParam("operator");

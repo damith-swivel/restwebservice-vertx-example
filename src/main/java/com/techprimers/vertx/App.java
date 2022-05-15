@@ -38,9 +38,9 @@ public class App extends AbstractVerticle {
     	final Router router = Router.router(vertx);
     	vertx.deployVerticle((App.class), options);
 
-          	  Route OperatorTypeCheck = router
+          	  Route SIMtypeCheck = router
 					  //GET Endpoint
-	                     .get("/:operator/:msisdn/getsubscribertype1")
+	                     .get("/:operator/:msisdn/getSIMtype")
 	                     .produces("application/json")
 	                     .handler(routingContext -> {
 							 String operator = routingContext.request().getParam("operator");
@@ -48,12 +48,11 @@ public class App extends AbstractVerticle {
 	                    	 HttpServerResponse response = routingContext.response();
 	                      //  response.setChunked(true);
 	                         String JsonResponse = "{\n" + 
-	                         		"  \"getSubscriberTypeResponse\": {\n" + 
+	                         		"  \"getSIMtypeResponse\": {\n" +
 	                         		"    \"msisdn\": \""+operator+"\",\n" +
 	                         		"    \"imsi\": \""+msisdn+"\",\n" +
 	                         		"    \"userType\": \"postpaid\",\n" + 
-	                         		"    \"userStatus\": \"Active\",\n" + 
-	                         		"    \"mvno\": \"No\"\n" + 
+	                         		"    \"userStatus\": \"Active\",\n" +
 	                         		"  }\n" + 
 	                         		"}";  
 
@@ -66,6 +65,38 @@ public class App extends AbstractVerticle {
 	             	                       LOGGER.info("----- called getsubscribertype on port"+port);
 	         	                          });
 	                    });
+
+		Route rechargeRequest = router
+				.post("/:msisdn/transactions/:amount")
+				.produces("application/json")
+				.handler(routingcontext -> {
+					HttpServerResponse response = routingcontext.response();
+					String jsonResponse ="{\n" +
+							"    \"rechargeResponse\": {\n" +
+							"        \"imsi\": 94752596600,\n" +
+							"        \"dateofbirth\": \"1990-01-01t00:00:00.000+00:00\",\n" +
+							"        \"nationality\": null,\n" +
+							"        \"race\": null,\n" +
+							"        \"gender\": null,\n" +
+							"        \"customeridno\": 880242482V,\n" +
+							"        \"customeridtype\": \"NIC\",\n" +
+							"        \"creditlimit\": \"100\",\n" +
+							"        \"errorcode\": \"ok\",\n" +
+							"        \"errormessage\": null\n" +
+							"    }\n" +
+							"}";
+
+					vertx.setTimer(TimeUnit.MILLISECONDS.toMillis(1000), l -> {
+						json = new JsonObject(jsonResponse);
+						response.putHeader("Content-Type", "application/json; charset=UTF8")
+								.setStatusCode(200);
+						response.end(Json.encodePrettily(json));
+						LOGGER.info("-------Recharge successful ! ----------");
+					});
+
+
+
+				});
         httpServer
                 .requestHandler(router::accept)
                 .listen(port);

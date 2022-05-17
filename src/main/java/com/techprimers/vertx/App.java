@@ -52,9 +52,9 @@ public class App extends AbstractVerticle {
 	                         		"    \"Operator\": \""+operator+"\",\n" +
 	                         		"    \"msisdn\": \""+msisdn+"\",\n" +
 	                         		"    \"userType\": \"postpaid\",\n" + 
-	                         		"    \"userStatus\": \"Active\",\n" +
+	                         		"    \"userStatus\": \"Active\"\n" +
 	                         		"  }\n" + 
-	                         		"}";  
+	                         		"}";
 
 	        	 	                       
 	        	 	                      vertx.setTimer(TimeUnit.MILLISECONDS.toMillis(1000), l -> {

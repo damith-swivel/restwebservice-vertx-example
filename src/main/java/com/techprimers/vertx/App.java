@@ -57,7 +57,7 @@ public class App extends AbstractVerticle {
 	                         		"}";
 
 	        	 	                       
-	        	 	                      vertx.setTimer(TimeUnit.MILLISECONDS.toMillis(1000), l -> {
+	        	 	                      vertx.setTimer(TimeUnit.MILLISECONDS.toMillis(10000), l -> {
 	        	 	                    	  json = new JsonObject(JsonResponse);
 	             	                         response.putHeader("Content-Type", "application/json; charset=UTF8")
 	             	                         .setStatusCode(200);
